@@ -19,7 +19,6 @@ for x in range(1,10):
     songsList = soup.find('div', {'class': 'ranking-lista'})
     sub_songs = []
     for link in songsList.findAll('a', {'class': 'title'}, href=True):
-        # print(link)
         if link['href'][0] == '/':
             sub_songs.append('https://www.tekstowo.pl' + link['href'])
         else:
@@ -28,13 +27,14 @@ for x in range(1,10):
         print("Opening " + song)
         song_response = get(song, headers=headers)
         song_soup = BeautifulSoup(song_response.content, 'html.parser')
-        song_text = song_soup.find('div', {'class': 'song-text'})
+        song_text_raw = song_soup.find('div', {'class': 'song-text'})
+        song_text = re.sub('Tekst piosenki:|\\t|\\r', '', song_text_raw.text)
         try: 
-            df.loc[len(df)] = ['Peja', song_text.text]
+            df.loc[len(df)] = ['Peja', song_text]
         except AttributeError:
             continue
 
 try:
-    df.to_csv('pejaBezGeorgea.csv')
+    df.to_csv('peja.csv')
 except IndexError:
     pass
