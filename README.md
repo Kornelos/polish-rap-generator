@@ -1,4 +1,4 @@
-# Machine learning based polish rap generator
+# Machine learning based polish RAP(R - Ryszard A - Andrzejewski P - Peja) generator
 
 ### Project elements:
 
