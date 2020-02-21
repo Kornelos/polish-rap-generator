@@ -1,0 +1,9 @@
+<div class="container">
+  <form [formGroup]="inputForm" (ngSubmit)="onSubmit(inputForm.value)">
+    <div class="form-group">
+      <label for="seed">Input seed</label>
+      <input id="seed" type="text" formControlName="seed">
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
