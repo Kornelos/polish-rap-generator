@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {Observable, throwError, of} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class MlService {
   };
 
   sendSeed(seed: string): Observable<string> {
-    return  this.httpClient.get<string>(this.apiURL )
+    return  this.httpClient.get<string>(this.apiURL + seed )
       .pipe(
         retry(1),
         catchError(this.handleError)
